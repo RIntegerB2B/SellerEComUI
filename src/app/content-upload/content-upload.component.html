@@ -3,7 +3,7 @@
     <input type="file"
            id="file"
            (change)="handleFileInput($event.target.files)">
-           <input type="button" (click)="uploadFileToActivity()" value="Click"/>
+           <input type="button" (click)="uploadFileToActivity()" value="Save"/>
 </div>
 <div *ngFor="let cont of this.contents">
     <app-content-upload-view [filePath] = "cont.contentData"></app-content-upload-view>

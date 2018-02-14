@@ -23,7 +23,7 @@ export class ContentUploadService {
       'application/json; charset=utf-8'
     });
     let options = new RequestOptions({ headers: headers });
-    return this.http.post("http://localhost:3000/contents" , content, options)
+    return this.http.post("http://ec2-13-127-168-120.ap-south-1.compute.amazonaws.com:4200/contents" , content, options)
         .map((response : Response) => <any>response.json())
         .do((x) => console.log(x)).catch((e) => this.handleError(e));
   }
@@ -34,20 +34,20 @@ export class ContentUploadService {
       'application/json; charset=utf-8'
     });
     let options = new RequestOptions({ headers: headers });
-      return this.http.post("http://localhost:3000/contents/contentDetail", fileToUpload, options)
+      return this.http.post("http://ec2-13-127-168-120.ap-south-1.compute.amazonaws.com:4200/contents/contentDetail", fileToUpload, options)
       .map((response : Response) => <any>response.json())
       .do((x) => console.log(x)).catch((e) => this.handleError(e));
   }
 
   getContents(): Observable<any> {
-    return this.http.get("http://localhost:3000/contents")
+    return this.http.get("http://ec2-13-127-168-120.ap-south-1.compute.amazonaws.com:4200/contents")
         .map((response : Response) => <IContent[]>response.json())
         .do((x) => console.log(x)).catch((e) => this.handleError(e));
     }
 
   getContentDetail(contentId : Number) :Observable<any>{
 
-    return this.http.get("http://localhost:3000/contents/contentDetail/" + contentId)
+    return this.http.get("http://ec2-13-127-168-120.ap-south-1.compute.amazonaws.com:4200/contents/contentDetail/" + contentId)
       .map((response : Response) => <any>response.json())
       .do((x) => console.log(x)).catch((e) => this.handleError(e));
   }

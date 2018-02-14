@@ -16,7 +16,7 @@ export class ContentViewService {
   }
   
    getContents(): Observable<any> {
-    return this.http.get("http://localhost:3000/contents")
+    return this.http.get("http://ec2-13-127-168-120.ap-south-1.compute.amazonaws.com:4200/contents")
         .map((response : Response) => <IContentList[]>response.json())
         .do((x) => console.log(x)).catch((e) => this.handleError(e));
     }
@@ -27,7 +27,7 @@ export class ContentViewService {
       'application/json; charset=utf-8'
   });
   let options = new RequestOptions({ headers: headers });
-  return this.http.post("http://localhost:3000/contentDetail", JSON.stringify(newContent), options)
+  return this.http.post("http://ec2-13-127-168-120.ap-south-1.compute.amazonaws.com:4200/contentDetail", JSON.stringify(newContent), options)
   .map((response : Response) => <IContentDetail[]>response.json())
   .do((x) => console.log(x)).catch((e) => this.handleError(e));
  }*/

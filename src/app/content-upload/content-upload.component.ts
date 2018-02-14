@@ -67,6 +67,38 @@ convertDataURIToBinary(dataURI) {
       }; 
    
   } 
+
+  handleFileInputBinary(files: FileList) {
+    this.fileToUpload = files[0];
+    //let _formData : FormData = new FormData();
+    let reader = new FileReader();
+      let file = this.fileToUpload;
+      
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.check1 = reader.result;
+        console.log( this.check1 );
+        this.byteArrayConverted = this.convertDataURIToBinary(this.check1);
+        console.log( this.byteArrayConverted );
+        this.content = new IContent();
+     //   _formData.append("Name",  this.fileToUpload.name);
+     //   _formData.append("MyFile",  reader.result);
+        var byteArray = new Uint8Array(reader.result);
+        
+       /* this.fileBase64Value = btoa(String.fromCharCode.apply(null, byteArray));
+        this.fileStream= "data:" + this.fileToUpload.type + ";base64," + this.fileBase64Value;
+        this.fileStreamArray.push(this.fileStream);*/
+        this.content.clientId=1;
+        this.content.contentData=reader.result;
+        this.content.contentDescription="Sample File";
+        this.content.fileName=this.fileToUpload.name;
+        this.contents.push(this.content);
+       // var x ={publishId :1, contentData: this.fileStream, fileName : this.fileToUpload.name};
+        
+      }; 
+   
+  } 
+
   uploadFileToActivity() {
       this.contentUploadService.createContent(this.contents[0]).subscribe(data =>
       { 
