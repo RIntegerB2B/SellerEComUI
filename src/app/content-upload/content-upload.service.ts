@@ -5,10 +5,12 @@ import {IContent} from '../content-upload/content';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
+import {AppSetting}  from '../config/appSetting';
 
 
 @Injectable()
 export class ContentUploadService {
+  serviceUrl: string = AppSetting.awsServiceUrl;
   handleError(arg0: any): any {
     return false;
   }
@@ -17,13 +19,19 @@ export class ContentUploadService {
   ngOnInit() {
   }
 
-  createContent(content: IContent): Observable<any> {
+  getNewPublishId(clientId: Number): Observable<any> {
+    return this.http.get(this.serviceUrl + "contents/publishId/" + clientId)
+        .map((response : Response) => <any>response.json())
+        .do((x) => console.log(x)).catch((e) => this.handleError(e));
+  }
+
+  createContent(contents: IContent): Observable<any> {
     let headers = new Headers({
       'Content-Type':
       'application/json; charset=utf-8'
     });
     let options = new RequestOptions({ headers: headers });
-    return this.http.post("http://ec2-13-127-168-120.ap-south-1.compute.amazonaws.com:4200/contents" , content, options)
+    return this.http.post(this.serviceUrl + "contents" , contents, options)
         .map((response : Response) => <any>response.json())
         .do((x) => console.log(x)).catch((e) => this.handleError(e));
   }
@@ -34,20 +42,20 @@ export class ContentUploadService {
       'application/json; charset=utf-8'
     });
     let options = new RequestOptions({ headers: headers });
-      return this.http.post("http://ec2-13-127-168-120.ap-south-1.compute.amazonaws.com:4200/contents/contentDetail", fileToUpload, options)
+      return this.http.post(this.serviceUrl + "contents/contentDetail", fileToUpload, options)
       .map((response : Response) => <any>response.json())
       .do((x) => console.log(x)).catch((e) => this.handleError(e));
   }
 
   getContents(): Observable<any> {
-    return this.http.get("http://ec2-13-127-168-120.ap-south-1.compute.amazonaws.com:4200/contents")
+    return this.http.get(this.serviceUrl + "contents/1")
         .map((response : Response) => <IContent[]>response.json())
         .do((x) => console.log(x)).catch((e) => this.handleError(e));
     }
 
-  getContentDetail(contentId : Number) :Observable<any>{
+  getContentDetail(publishId : Number) :Observable<any>{
 
-    return this.http.get("http://ec2-13-127-168-120.ap-south-1.compute.amazonaws.com:4200/contents/contentDetail/" + contentId)
+    return this.http.get(this.serviceUrl + "contents/contentDetail/" + publishId)
       .map((response : Response) => <any>response.json())
       .do((x) => console.log(x)).catch((e) => this.handleError(e));
   }

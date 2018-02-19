@@ -7,7 +7,7 @@ import {ContentDetailComponent} from './content-detail/content-detail.component'
 const routes: Routes = [
     { path: 'ContentUpload', component: ContentUploadComponent },
     { path: 'ContentView', component: ContentViewComponent },
-    { path: 'ContentDetail/:contentId', component: ContentDetailComponent },
+    { path: 'ContentDetail/:publishId/:encryptedKey', component: ContentDetailComponent },
     { path: '', redirectTo: 'ContentUpload', pathMatch: 'full' },
     { path: '**', redirectTo: 'ContentUpload', pathMatch: 'full' }
 ];

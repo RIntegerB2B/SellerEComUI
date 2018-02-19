@@ -35,8 +35,8 @@ export class ContentViewComponent implements OnInit {
     // console.log(this.patientInfo[0].LastName);
   }
 
-  getContentDetail(contentId : Number): void {
-      this.router.navigate(['/ContentDetail', contentId]);
+  getContentDetail(publishId : Number, encryptedKey : String): void {
+      this.router.navigate(['/ContentDetail',publishId, encryptedKey ]);
 
   }
 }

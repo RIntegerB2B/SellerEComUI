@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {IContent} from '../content-upload/content';
 import { ContentUploadService } from "../content-upload/content-upload.service";
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-content-detail',
@@ -9,13 +10,16 @@ import { ContentUploadService } from "../content-upload/content-upload.service";
   styleUrls: ['./content-detail.component.css']
 })
 export class ContentDetailComponent implements OnInit {
-  contentId : Number;
+  publishId : number;
+  encryptedKey :string;
   errorMessage: any;
   contentDetail : IContent;
-  constructor(private route: ActivatedRoute, private contentUploadService : ContentUploadService) { 
+  constructor(private route: ActivatedRoute, private contentUploadService : ContentUploadService 
+    , private sanitizer:DomSanitizer) { 
     this.route.params.subscribe( params => {
       console.log(params);
-      this.contentId = params.contentId;
+      this.publishId = params.publishId;
+      this.encryptedKey = "whatsapp://send?text=http://sellerecombuyerproduct.s3-website.ap-south-1.amazonaws.com/?value=" + params.encryptedKey
     });
 
   }
@@ -25,7 +29,7 @@ export class ContentDetailComponent implements OnInit {
   }
 
   getContentDetail(): void {
-    this.contentUploadService.getContentDetail(this.contentId).subscribe(contDetail =>
+    this.contentUploadService.getContentDetail(this.publishId).subscribe(contDetail =>
       { 
         this.contentDetail = contDetail; 
         console.log(this.contentDetail);
@@ -37,6 +41,13 @@ export class ContentDetailComponent implements OnInit {
     
     );
     // console.log(this.patientInfo[0].LastName);
+  }
+
+  sanitize(url:string){
+    return this.sanitizer.bypassSecurityTrustUrl(url);
+  }
+  publishToWatsapp():void{
+    
   }
 
 }
