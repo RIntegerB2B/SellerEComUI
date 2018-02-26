@@ -5,9 +5,16 @@
            (change)="handleFileInput($event.target.files)">
            <input type="button" (click)="uploadFileToActivity()" value="Save"/>
 </div>
-<div *ngFor="let cont of this.contents">
-    <app-content-upload-view [filePath] = "cont.contentData"></app-content-upload-view>
 
+
+<div *ngFor="let cont of this.contents" class="container">
+    <div class="col-xs-12 col-xl-12">
+        <app-content-upload-view [filePath] = "cont.contentData"></app-content-upload-view>
+    </div>
+</div>
+
+<div class="overlayDiv" [style.display]="showLoadingImage">
+    <img class="img-responsive col-xs-12 col-xl-12" src ="../../loading.gif">
 </div>
 
 

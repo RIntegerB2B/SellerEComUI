@@ -1,8 +1,16 @@
-<input type="button" value="Publish" (click) = "publishToWatsapp()"/>
 <a [href]="sanitize(this.encryptedKey)" >Publish</a>
 
   
-     <div *ngFor = "let content of contentDetail" >
-      <app-content-upload-view [filePath] = "content.contentData"></app-content-upload-view>
-     </div>
+     
+
+     <div *ngFor = "let content of contentDetail" class="container">
+            <div class="col-xs-12 col-xl-12">
+                    <app-content-upload-view [filePath] = "content.contentData"></app-content-upload-view>
+            </div>
+        </div>
+
+        <div class="overlayDiv" [style.display]="showLoadingImage">
+
+                <img class="img-responsive col-xs-12 col-xl-12" src ="../../loading.gif">
+        </div>
       

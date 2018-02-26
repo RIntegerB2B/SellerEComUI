@@ -1,0 +1,27 @@
+<form [formGroup]="adminSignInForm" (ngSubmit)="signInSubmit(adminSignInForm)" novalidate>
+  <div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+                <div class="">
+                        <div class="form-group">
+                            <input class="form-control required"  required placeholder="User Name" formControlName="userName" type="text">
+                              <div *ngIf="adminSignInForm.controls['userName'].errors
+                               && !adminSignInForm.controls['userName'].pristine" class="alert alert-danger">
+                                  <div [hidden]="!adminSignInForm.controls['userName'].errors.required">User Name is required.</div>
+                                </div>
+                        </div>
+                        <div class="form-group">
+                          <input class="form-control required" required placeholder="Password" formControlName="password" type="password">
+                            <div *ngIf="adminSignInForm.controls['password'].errors
+                             && !adminSignInForm.controls['password'].pristine" class="alert alert-danger">
+                                <div [hidden]="!adminSignInForm.controls['password'].errors.required">
+                                    Password is required.
+                                  </div>
+                            </div>
+                        </div>
+                        <input class="btn btn-primary btn-block" value="Sign In" type="submit" [disabled]='!adminSignInForm.valid'>
+                </div>
+        </div>
+    </div>
+  </div>
+  </form>

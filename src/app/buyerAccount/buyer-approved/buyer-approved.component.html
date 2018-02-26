@@ -1,0 +1,16 @@
+<div *ngFor="let buyer of this.buyers" class="container" style="margin:2px">
+  <div class="col-xs-12 col-xl-12 headerBlock" (click) = "showBuyerDetail(buyer._id)">
+      <a style="cursor:Pointer" >{{buyer.firstName}} {{buyer.lastName}}</a> 
+  </div>
+  <div [hidden] = "!buyer.showDetail" class="boxBlock">
+      <div class="col-xs-12 col-xl-6">
+              <label>Phone No: </label> 
+          <label>{{buyer.phoneNumber}}</label> 
+      </div>
+      <div class="col-xs-12 col-xl-6">
+              <label>Address: </label> 
+          <label>{{buyer.city}} {{buyer.state}}</label> 
+      </div>
+      
+  </div>
+</div>

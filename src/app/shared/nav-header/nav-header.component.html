@@ -1,12 +1,35 @@
-<div>
-  <nav class='navbar navbar-default'>
-      <div class='container-fluid'>
-          <a class='navbar-brand'></a>
-          <ul class='nav navbar-nav'>
-              <li><a [routerLink]="['/ContentUpload']">Content Upload</a></li>
-              <li><a [routerLink]="['/ContentView']">Content View</a></li>
-          </ul>
-      </div>
-  </nav>
 
+<div style=" padding: 0.5% 1%" *ngIf="nav.visible">
+    <div class="csNavBarHeader" style="background-color: white">
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand csNavFont" [routerLink]="['/ContentUpload']">Seller ECom</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link csNavFont" [routerLink]="['/ContentUpload']">
+                    <span class="csNavFont">Content Upload</span>
+                </a>
+             </li>
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/ContentView']">
+                    <span class="csNavFont">Content View</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/Buyer/ApprovalRequest']">
+                    <span class="csNavFont">Approval Request</span>
+                </a>
+            </li>	
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/Buyer/Approved']">
+                    <span class="csNavFont">Approved Buyers</span>
+                </a>
+            </li>		
+          </ul>     
+        </div>
+      </nav>
 </div>

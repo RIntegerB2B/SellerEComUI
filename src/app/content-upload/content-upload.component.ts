@@ -3,12 +3,15 @@ import { ContentUploadService } from './content-upload.service';
 import {ContentUploadViewComponent} from '../content-upload-view/content-upload-view.component';
 import {IContent} from '../content-upload/content';
 import * as randKeyGen from 'random-key';
+import  {NavHeaderService} from '../shared/nav-header/nav-header.service';
+
 @Component({
   selector: 'app-content-upload',
   templateUrl: './content-upload.component.html',
   styleUrls: ['./content-upload.component.css']
 })
 export class ContentUploadComponent implements OnInit {
+  showLoadingImage:string ="none";
   fileToUpload: File = null;
   fileBase64Value: any;
   fileStream: any;
@@ -19,9 +22,10 @@ export class ContentUploadComponent implements OnInit {
   byteArrayConverted : any;
   errorMessage:any;
   currentDateTime : Date= new Date();
-  constructor(private contentUploadService: ContentUploadService ) {}
+  constructor(private contentUploadService: ContentUploadService,  private nav : NavHeaderService ) {}
 
   ngOnInit() {
+    this.nav.show();
   }
 
     BASE64_MARKER:any = ';base64,';
@@ -105,9 +109,10 @@ convertDataURIToBinary(dataURI) {
   } 
 
   uploadFileToActivity() {
-    
+    this.showLoadingImage="block";
       this.contentUploadService.getNewPublishId(1).subscribe(data =>
       { 
+        this.showLoadingImage="none";
         console.log(data.publishId);
         for(var i =0; i< this.contents.length;i++){
           this.contents[i].publishId=data.publishId;

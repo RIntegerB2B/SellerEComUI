@@ -10,6 +10,7 @@ import {DomSanitizer} from '@angular/platform-browser';
   styleUrls: ['./content-detail.component.css']
 })
 export class ContentDetailComponent implements OnInit {
+  showLoadingImage:string ="none";
   publishId : number;
   encryptedKey :string;
   errorMessage: any;
@@ -29,8 +30,10 @@ export class ContentDetailComponent implements OnInit {
   }
 
   getContentDetail(): void {
+    this.showLoadingImage="block";
     this.contentUploadService.getContentDetail(this.publishId).subscribe(contDetail =>
       { 
+        this.showLoadingImage="none";
         this.contentDetail = contDetail; 
         console.log(this.contentDetail);
       },
@@ -46,8 +49,6 @@ export class ContentDetailComponent implements OnInit {
   sanitize(url:string){
     return this.sanitizer.bypassSecurityTrustUrl(url);
   }
-  publishToWatsapp():void{
-    
-  }
+  
 
 }
