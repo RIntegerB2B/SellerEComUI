@@ -1,0 +1,23 @@
+<div class="modal fade show" id="myModal" [ngClass]="alertModel?.displayClass">
+  <div  class="modal-dialog">
+    <div  class="modal-content alertModalPosition">
+
+      
+      <div  class="modal-header">
+        <h4 class="modal-title">{{alertModel?.modalHeader}}</h4>
+        <button  class="close" data-dismiss="modal" (click) ="closeModal()" type="button">×</button>
+      </div>
+
+      
+      <div  class="modal-body">
+       {{alertModel?.modalBody}}
+      </div>
+
+      
+      <div  class="modal-footer">
+        <button _ngcontent-c5="" class="btn btn-danger" (click) ="closeModal()" data-dismiss="modal" type="button">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>

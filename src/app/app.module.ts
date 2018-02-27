@@ -4,6 +4,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 
 import { AppComponent } from './app.component';
@@ -22,6 +23,7 @@ import { BuyerApprovedComponent } from './buyerAccount/buyer-approved/buyer-appr
 import { AdminSigninComponent } from './adminAccount/admin-signin/admin-signin.component';
 import  {AdminAccountService} from './adminAccount/adminAccount.service';
 import  {NavHeaderService} from './shared/nav-header/nav-header.service';
+import { AlertModalComponent } from './shared/alert-modal/alert-modal.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import  {NavHeaderService} from './shared/nav-header/nav-header.service';
     ContentDetailComponent,
     BuyerApprovalRequestComponent,
     BuyerApprovedComponent,
-    AdminSigninComponent
+    AdminSigninComponent,
+    AlertModalComponent
     
   ],
   imports: [
@@ -43,6 +46,7 @@ import  {NavHeaderService} from './shared/nav-header/nav-header.service';
     RouterModule,
     Routing,
     ReactiveFormsModule,
+    AngularFontAwesomeModule,
     NgbModule.forRoot()
   ],
   providers: [
