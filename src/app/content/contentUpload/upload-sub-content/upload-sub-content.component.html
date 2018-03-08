@@ -1,0 +1,52 @@
+<form [formGroup]="uploadSubContentForm" novalidate>
+  <div class="container-fluid">
+    <div class="col-12 col-md-12 mx-auto">
+      <div class="row">
+        <div class="form-group">
+          <div class="row">
+              <div class="col">
+                  <label class="center-block">Main Content:</label>
+                <div ngbDropdown class="d-inline-block">
+                  <button class="btn btn-outline-primary"  ngbDropdownToggle>{{this.mainContentSelectedData}}</button>
+                  <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                      <button class="dropdown-item" *ngFor="let mainContent of mainContents" (click)="onMainContentChange(mainContent)" >{{mainContent.mainContentName}}</button>
+                    </div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+      <div class="container fluid">
+        <div class="col-12 col-md-12 mx-auto">
+          <div class="row">
+            <div class="custom-file">
+              <input type="file" class="custom-file-input"   (change)="subContentImageUpload($event.target.files)">
+              <label class="custom-file-label" for="inputGroupFile04">Upload Sub Images</label>
+            </div>
+          </div>
+          <div class="row">
+            <input class="form-control required" required placeholder="Image Name" formControlName="subContentName" type="text">
+            <div *ngIf="uploadSubContentForm.controls['subContentName'].errors && !uploadSubContentForm.controls['subContentName'].pristine" class="alert alert-danger">
+              <div [hidden]="!uploadSubContentForm.controls['subContentName'].errors.required">
+                  Please enter Image Name
+              </div>
+            </div>
+            <input class="btn btn-primary" value="Add" (click)="uploadSubContentSubmit(uploadSubContentForm)"  type="submit">
+          </div>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="form-group">
+          <div  class="container">
+            <div class="col-12 col-xs-12 col-xl-12" *ngIf="this.subContent?.subContentDetailImage">
+                <app-content-upload-view [filePath] = "this.subContent?.subContentDetailImage"></app-content-upload-view>
+            </div>
+          </div>
+      </div>
+      
+    </div>
+  </div>
+  </div>
+</form>
+<app-alert-modal [alertModel] = "this.alertModal"></app-alert-modal>

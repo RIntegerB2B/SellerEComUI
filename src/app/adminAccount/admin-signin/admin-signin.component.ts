@@ -40,7 +40,7 @@ export class AdminSigninComponent implements OnInit {
               console.log(data);
               if(data.length >0 ){
                 console.log(data[0]);
-                this.router.navigate(['/ContentUpload']);
+                this.router.navigate(['/MainContentUpload']);
               }
 
     }, error => {

@@ -1,0 +1,73 @@
+<form [formGroup]="uploadMainContentForm" novalidate>
+  <div class="container-fluid">
+    <div class="col-12 col-md-12 mx-auto">
+      <div class="row">
+        <div class="form-group">
+            
+              
+              <div class="row">
+                  <div class="col">
+                      <label class="center-block">Main Category:</label>
+                    <div ngbDropdown class="d-inline-block">
+                      <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{this.mainCatSelectedData}}</button>
+                      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                          <button class="dropdown-item" *ngFor="let mainCategory of mainCategories" (click)="onMainCategoryChange(mainCategory)" >{{mainCategory.categoryName}}</button>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                
+            
+          </div>
+          <div class="form-group">
+              <div class="row">
+                  <div class="col">
+                    <label class="center-block">Sub Category:</label>
+                      <div ngbDropdown class="d-inline-block">
+                          <button class="btn btn-outline-primary"  ngbDropdownToggle>{{this.subCatSelectedData}}</button>
+                          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                              <button class="dropdown-item" *ngFor="let subCategory of subCategories" (click)="onSubCategoryChange(subCategory)" >{{subCategory.subCategoryName}}</button>
+                            </div>
+                        </div>
+                    
+                </div>
+              </div>
+          </div>
+      </div>
+      <div class="container fluid">
+          <div class="col-12 col-md-12 mx-auto">
+          <div class="row">
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="mainFile"  (change)="mainContentImageUpload($event.target.files)">
+                    <label class="custom-file-label" for="inputGroupFile04">Upload Main Image</label>
+                  </div>
+                  
+              </div>
+              <div class="row">
+                  <input class="form-control required" required placeholder="Image Name" formControlName="mainContentName" type="text">
+                  <div *ngIf="uploadMainContentForm.controls['mainContentName'].errors
+                  && !uploadMainContentForm.controls['mainContentName'].pristine" class="alert alert-danger">
+                    <div [hidden]="!uploadMainContentForm.controls['mainContentName'].errors.required">
+                        Please enter Image Name
+                    </div>
+                  </div>
+                  <input class="btn btn-primary" value="Add" (click)="uploadMainContentSubmit(uploadMainContentForm)"  type="submit">
+                  </div>
+                  </div>
+      </div>
+      
+      <div class="row">
+        <div class="form-group">
+          <div  class="container">
+              
+            <div class="col-12 col-xs-12 col-xl-12" *ngIf="this.content?.mainContentImage">
+                <app-content-upload-view [filePath] = "this.content?.mainContentImage"></app-content-upload-view>
+            </div>
+          </div>
+      </div>
+      
+    </div>
+  </div>
+  </div>
+</form>
+<app-alert-modal [alertModel] = "this.alertModal"></app-alert-modal>

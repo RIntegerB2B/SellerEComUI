@@ -3,7 +3,7 @@ import {IContentList} from '../content-view/content-view';
 import {ContentViewService} from './content-view.service';
 import { Observable } from 'rxjs/Observable';
 import { ContentUploadService } from "../content-upload/content-upload.service";
-import {IContent} from '../content-upload/content';
+import {Content} from '../content-upload/content.model';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./content-view.component.css']
 })
 export class ContentViewComponent implements OnInit {
-  contents: IContent[];
+  contents: Content[];
   errorMessage: string;
   constructor(private contentUploadService: ContentUploadService ,
     private router: Router) { }

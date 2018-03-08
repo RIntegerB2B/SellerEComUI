@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, RequestOptions, Headers} from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import {IContent} from '../content-upload/content';
+import {Content} from '../content-upload/content.model';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
@@ -10,9 +10,19 @@ import {AppSetting}  from '../config/appSetting';
 
 @Injectable()
 export class ContentUploadService {
-  serviceUrl: string = AppSetting.local3000ServiceUrl;
+  serviceUrl: string = AppSetting.awsServiceUrl;
+  handleContentError(arg0: any): any {
+    console.log(arg0);
+    let errorContent : Content = new Content();
+    errorContent.errorMessage=arg0;
+    return errorContent;
+  }
+
   handleError(arg0: any): any {
-    return false;
+    console.log(arg0);
+    let errorContent : Content = new Content();
+    errorContent.errorMessage=arg0;
+    return errorContent;
   }
   constructor(private http: Http) { }
 
@@ -20,20 +30,20 @@ export class ContentUploadService {
   }
 
   getNewPublishId(clientId: Number): Observable<any> {
-    return this.http.get(this.serviceUrl + "contents/publishId/" + clientId)
+    return this.http.get(this.serviceUrl + "contents/publishId")
         .map((response : Response) => <any>response.json())
         .do((x) => console.log(x)).catch((e) => this.handleError(e));
   }
 
-  createContent(contents: IContent): Observable<any> {
+  createContent(content: Content): Observable<any> {
     let headers = new Headers({
       'Content-Type':
       'application/json; charset=utf-8'
     });
     let options = new RequestOptions({ headers: headers });
-    return this.http.post(this.serviceUrl + "contents" , contents, options)
-        .map((response : Response) => <any>response.json())
-        .do((x) => console.log(x)).catch((e) => this.handleError(e));
+    return this.http.post(this.serviceUrl + "contents" , content, options)
+        .map((response : Response) => <Content>response.json())
+        .do((x) => console.log(x)).catch((e) => this.handleContentError(e));
   }
 
   postFile(fileToUpload: any): Observable<any> {
@@ -49,7 +59,7 @@ export class ContentUploadService {
 
   getContents(): Observable<any> {
     return this.http.get(this.serviceUrl + "contents/1")
-        .map((response : Response) => <IContent[]>response.json())
+        .map((response : Response) => <Content[]>response.json())
         .do((x) => console.log(x)).catch((e) => this.handleError(e));
     }
 

@@ -10,7 +10,7 @@ import {AppSetting}  from '../config/appSetting';
 
 @Injectable()
 export class AdminAccountService {
-  serviceUrl: string = AppSetting.local3000ServiceUrl;
+  serviceUrl: string = AppSetting.awsServiceUrl;
   handleError(arg0: any): any {
     console.log(arg0);
   }

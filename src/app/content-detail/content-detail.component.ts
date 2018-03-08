@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {IContent} from '../content-upload/content';
+import {Content} from '../content-upload/content.model';
 import { ContentUploadService } from "../content-upload/content-upload.service";
 import {DomSanitizer} from '@angular/platform-browser';
 
@@ -14,7 +14,7 @@ export class ContentDetailComponent implements OnInit {
   publishId : number;
   encryptedKey :string;
   errorMessage: any;
-  contentDetail : IContent;
+  contentDetail : Content;
   constructor(private route: ActivatedRoute, private contentUploadService : ContentUploadService 
     , private sanitizer:DomSanitizer) { 
     this.route.params.subscribe( params => {

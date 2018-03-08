@@ -8,6 +8,15 @@ body {
   margin: 0;
   background-color: #eee;
 }
+
+.ng-valid.required {
+  border-left: 5px solid #42A948; /* green */
+}
+
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442; /* red */
+}
+
 .csNavFont{
   color : #005a85;
 }

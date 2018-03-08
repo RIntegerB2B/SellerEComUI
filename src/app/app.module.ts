@@ -24,6 +24,11 @@ import { AdminSigninComponent } from './adminAccount/admin-signin/admin-signin.c
 import  {AdminAccountService} from './adminAccount/adminAccount.service';
 import  {NavHeaderService} from './shared/nav-header/nav-header.service';
 import { AlertModalComponent } from './shared/alert-modal/alert-modal.component';
+import { MainCategoryComponent } from './content/category/main-category/main-category.component';
+import { SubCategoryComponent } from './content/category/sub-category/sub-category.component';
+import {ContentService} from './content/contentService';
+import { UploadMainContentComponent } from './content/contentUpload/upload-main-content/upload-main-content.component';
+import { UploadSubContentComponent } from './content/contentUpload/upload-sub-content/upload-sub-content.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +42,11 @@ import { AlertModalComponent } from './shared/alert-modal/alert-modal.component'
     BuyerApprovalRequestComponent,
     BuyerApprovedComponent,
     AdminSigninComponent,
-    AlertModalComponent
+    AlertModalComponent,
+    MainCategoryComponent,
+    SubCategoryComponent,
+    UploadMainContentComponent,
+    UploadSubContentComponent
     
   ],
   imports: [
@@ -54,7 +63,8 @@ import { AlertModalComponent } from './shared/alert-modal/alert-modal.component'
     ContentViewService,
     BuyerAccountService,
     AdminAccountService,
-    NavHeaderService
+    NavHeaderService,
+    ContentService
   ],
   bootstrap: [AppComponent]
 })

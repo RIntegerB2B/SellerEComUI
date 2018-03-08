@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ContentUploadService } from './content-upload.service';
 import {ContentUploadViewComponent} from '../content-upload-view/content-upload-view.component';
-import {IContent} from '../content-upload/content';
+import {Content} from '../content-upload/content.model';
 import * as randKeyGen from 'random-key';
 import  {NavHeaderService} from '../shared/nav-header/nav-header.service';
 
@@ -11,17 +11,19 @@ import  {NavHeaderService} from '../shared/nav-header/nav-header.service';
   styleUrls: ['./content-upload.component.css']
 })
 export class ContentUploadComponent implements OnInit {
+  // TODO: Code Clean Up has to be done
   showLoadingImage:string ="none";
   fileToUpload: File = null;
   fileBase64Value: any;
   fileStream: any;
   fileStreamArray: Array<string> = new Array();
-  contents:Array<IContent> = new Array();
-  content = new IContent(); 
+  contents:Array<Content> = new Array();
+  content = new Content(); 
   check1:any;
   byteArrayConverted : any;
   errorMessage:any;
   currentDateTime : Date= new Date();
+
   constructor(private contentUploadService: ContentUploadService,  private nav : NavHeaderService ) {}
 
   ngOnInit() {
@@ -63,16 +65,12 @@ convertDataURIToBinary(dataURI) {
        /* this.fileBase64Value = btoa(String.fromCharCode.apply(null, byteArray));
         this.fileStream= "data:" + this.fileToUpload.type + ";base64," + this.fileBase64Value;
         this.fileStreamArray.push(this.fileStream);*/
-        this.content = new IContent();
-        this.content.clientId=1;
-        this.content.contentData=reader.result;
+        this.content = new Content();
+        this.content.contentImage=reader.result;
         this.content.contentDescription="Sample File";
         this.content.contentFileName=this.fileToUpload.name;
         this.content.createdDate=this.currentDateTime;
-
         this.contents.push(this.content);
-       // var x ={publishId :1, contentData: this.fileStream, fileName : this.fileToUpload.name};
-        
       }; 
    
   } 
@@ -89,7 +87,7 @@ convertDataURIToBinary(dataURI) {
         console.log( this.check1 );
         this.byteArrayConverted = this.convertDataURIToBinary(this.check1);
         console.log( this.byteArrayConverted );
-        this.content = new IContent();
+        this.content = new Content();
      //   _formData.append("Name",  this.fileToUpload.name);
      //   _formData.append("MyFile",  reader.result);
         var byteArray = new Uint8Array(reader.result);
@@ -97,8 +95,7 @@ convertDataURIToBinary(dataURI) {
        /* this.fileBase64Value = btoa(String.fromCharCode.apply(null, byteArray));
         this.fileStream= "data:" + this.fileToUpload.type + ";base64," + this.fileBase64Value;
         this.fileStreamArray.push(this.fileStream);*/
-        this.content.clientId=1;
-        this.content.contentData=reader.result;
+        this.content.contentImage=reader.result;
         this.content.contentDescription="Sample File";
         this.content.fileName=this.fileToUpload.name;
         this.contents.push(this.content);

@@ -1,0 +1,21 @@
+<form [formGroup]="subCategoryForm" (ngSubmit)="subCategorySubmit(subCategoryForm)" novalidate>
+  <div class="container-fluid">
+    <div class="col-12 col-md-12 mx-auto">
+        <div class="row">
+            <div class="form-group">
+                <label class="center-block">Main Category:
+                  <select class="form-control" formControlName="mainCategorySelect">
+                      <option *ngFor="let mainCategory of mainCategories" [value]="mainCategory._id">{{mainCategory.categoryName}}</option>
+                  </select>
+                </label>
+              </div>
+          </div>
+      <div class="row">
+        <div class="form-group">
+            <input class="form-control required" required placeholder="Sub Category Name" formControlName="subCategoryName" type="text">
+            <input class="btn btn-primary" value="Add" type="submit">
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
