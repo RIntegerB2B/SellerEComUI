@@ -35,7 +35,7 @@ export class BuyerApprovedComponent implements OnInit {
   showBuyerDetail(id : number): void {
     this.buyers.forEach(function(buyer: Buyer){
       if(buyer._id==id){
-        buyer.showDetail=true;
+        buyer.showDetail=!buyer.showDetail;
       }
       else{
         buyer.showDetail=false;

@@ -12,6 +12,7 @@ import  {NavHeaderService} from '../shared/nav-header/nav-header.service';
 })
 export class ContentUploadComponent implements OnInit {
   // TODO: Code Clean Up has to be done
+  mainCategories : Array<number>;
   showLoadingImage:string ="none";
   fileToUpload: File = null;
   fileBase64Value: any;

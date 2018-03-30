@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormGroup, Validators , NgForm} from '@angular/
 import {ContentService} from '../../contentService';
 import {SubCategory} from '../../model/subCategory.model';
 import { MainCategory } from '../../model/mainCategory.model';
+import {AlertModal} from '../../../shared/alert-modal/alertModal.model';
 
 @Component({
   selector: 'app-sub-category',
@@ -14,6 +15,11 @@ export class SubCategoryComponent implements OnInit {
   subCategoryForm: FormGroup;
   subCategoryModel : SubCategory;
   mainCategories : MainCategory[];
+  mainCatSelectedData : string;
+  selectedMainCatId:number;
+  alertModal : AlertModal;
+  alertModalAdded : AlertModal;
+  alertModalError : AlertModal;
   constructor(private fb: FormBuilder, private contentService : ContentService) { }
 
   ngOnInit() {
@@ -26,6 +32,21 @@ export class SubCategoryComponent implements OnInit {
       subCategoryName: ['', Validators.required ],
       mainCategorySelect: ''
     });
+    this.alertModalAdded = new AlertModal(
+      "displayNone",
+      "Added",
+      "Category Added!"
+    );
+    this.alertModal = new AlertModal(
+      "displayNone",
+      "",
+      ""
+    );
+    this.alertModalError = new AlertModal(
+      "displayNone",
+      "Error",
+      "Server Down. Please try after some time"
+    );
   }
 
   getMainCategories():void{
@@ -39,19 +60,29 @@ export class SubCategoryComponent implements OnInit {
       }
     
     );
+    this.mainCatSelectedData ="Please Select";
+  }
+
+  onMainCategoryChange(selectedMainCat) : void {
+    this.mainCatSelectedData = selectedMainCat.categoryName;
+    this.selectedMainCatId=selectedMainCat._id;
   }
 
   subCategorySubmit(catForm:FormGroup)  
   {  
     this.subCategoryModel= new SubCategory();
-    let mainCatId : number = catForm.controls.mainCategorySelect.value;
+    let mainCatId : number = this.selectedMainCatId;
     this.subCategoryModel.subCategoryName=catForm.controls.subCategoryName.value;
     console.log(this.subCategoryModel); 
     console.log(mainCatId); 
     this.contentService.addSubCategory(this.subCategoryModel, mainCatId).subscribe(data => {
               console.log(data);
+              this.alertModalAdded.displayClass = "displayBlock";
+        this.alertModal = this.alertModalAdded;
     }, error => {
       console.log(error);
+      this.alertModalError.displayClass = "displayBlock";
+        this.alertModal = this.alertModalError;
     });
 
   }

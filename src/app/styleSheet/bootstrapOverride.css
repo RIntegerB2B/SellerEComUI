@@ -1,0 +1,28 @@
+.navbar{
+    padding: 0.5% 1%;
+}
+.pull-right{
+    padding-top: 6px;
+}
+
+.row{
+    margin-top: 5px;
+  }
+
+@media (min-width: 768px){
+    .col-md-1-5 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 16.666667%;
+        flex: 0 0 16.666667%;
+        max-width: 9.666667%;
+    }
+}
+
+#navHeaderDiv .dropdown:hover > .dropdown-menu {
+    display: block;
+}
+
+  
+  
+  
+ 

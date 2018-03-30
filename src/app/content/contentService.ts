@@ -13,7 +13,7 @@ import {AppSetting}  from '../config/appSetting';
 
 @Injectable()
 export class ContentService {
-  serviceUrl: string = AppSetting.awsServiceUrl;
+  serviceUrl: string = AppSetting.serviceUrl;
   handleError(arg0: any): any {
     console.log(arg0);
   }

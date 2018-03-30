@@ -1,24 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.min.css";
-@import "./bootstrapOverride.css";
+@import "./app/styleSheet/bootstrapOverride.css";
+@import "./app/styleSheet/angularStyle.css";
+@import "./app/styleSheet/blueTheme.css"; 
+/*@import "./app/styleSheet/blackTheme.css"; */
 
 html,
 body {
   height: 100%;
   margin: 0;
   background-color: #eee;
-}
-
-.ng-valid.required {
-  border-left: 5px solid #42A948; /* green */
-}
-
-.ng-invalid:not(form)  {
-  border-left: 5px solid #a94442; /* red */
-}
-
-.csNavFont{
-  color : #005a85;
 }
 
 .overlayDiv {

@@ -1,0 +1,19 @@
+.csNavBarHeader{
+    background-color: #007bff; color: #fff;
+    padding: 0.5% 1%;
+}
+
+#navHeaderDiv a
+{
+  color:#fff;
+}
+
+#navHeaderDiv .dropdown-menu
+{
+  background-color: #007bff;
+}
+
+#navHeaderDiv .dropdown-item:hover{
+  background-color: #6badf5;
+}
+

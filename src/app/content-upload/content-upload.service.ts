@@ -10,7 +10,7 @@ import {AppSetting}  from '../config/appSetting';
 
 @Injectable()
 export class ContentUploadService {
-  serviceUrl: string = AppSetting.awsServiceUrl;
+  serviceUrl: string = AppSetting.serviceUrl;
   handleContentError(arg0: any): any {
     console.log(arg0);
     let errorContent : Content = new Content();

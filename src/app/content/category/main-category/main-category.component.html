@@ -1,12 +1,21 @@
-<form [formGroup]="categoryForm" (ngSubmit)="categorySubmit(categoryForm)" novalidate>
+<form [formGroup]="categoryForm"  novalidate>
   <div class="container-fluid">
     <div class="row">
-        <div class="col-12 col-md-12 mx-auto">
-            <div class="form-group">
-               <input class="form-control required" required placeholder="Category Name" formControlName="categoryName" type="text">
-               <input class="btn btn-primary" value="Add" type="submit">
-             </div>
+      <div class="col-md-1-5">
+        <div ngbDropdown class="d-inline-block">
+          <button class="btn btn-outline-primary" ngbDropdownToggle>{{this.headerCatSelectedData}}</button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <button class="dropdown-item" *ngFor="let headCategory of headerCategories" (click)="onHeaderCategoryChange(headCategory)">{{headCategory.value}}</button>
+          </div>
         </div>
+      </div>
+      <div class="col-md-4 ">
+        <input class="form-control required" required placeholder="Category Name" formControlName="categoryName" type="text">
+      </div>
+      <div class="col-md-4 ">
+        <input class="btn btn-primary" value="Add Category" [disabled]='!categoryForm.valid' type="button" (click) = "categorySubmit(categoryForm)">
+      </div>
     </div>
   </div>
 </form>
+<app-alert-modal [alertModel]="this.alertModal"></app-alert-modal>
